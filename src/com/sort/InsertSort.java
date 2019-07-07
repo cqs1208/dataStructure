@@ -3,6 +3,7 @@ package com.sort;
 import java.util.Arrays;
 
 /**
+ * 插入排序
  * @author : chenqingsong
  * @date : 2019-06-30 22:43
  */
@@ -11,9 +12,9 @@ public class InsertSort {
 
     public static void main(String[] args) {
 
-        int arr[] = new int[80000];
-        for(int i = 0; i < 80000; i++){
-            arr[i] = (int)(Math.random() * 8000000);
+        int arr[] = new int[160000];
+        for(int i = 0; i < 160000; i++){
+            arr[i] = (int)(Math.random() * 16000000);
         }
 
         Long startTime = System.currentTimeMillis() / 1000;

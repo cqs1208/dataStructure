@@ -11,8 +11,8 @@ public class QuickSort {
     public static void main(String[] args) {
        // int[] arr = {-9, 78, 0, 23, -567, 70, -1, 900, 456};
 
-        int arr[] = new int[170000000];
-        for(int i = 0; i < 170000000; i++){
+        int arr[] = new int[30000000];
+        for(int i = 0; i < 30000000; i++){
             arr[i] = (int)(Math.random() * 1600000000);
         }
 

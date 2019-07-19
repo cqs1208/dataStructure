@@ -7,7 +7,33 @@ package com.tree.threadedbinarytree;
  */
 public class ThreadedBinaryTreeDemo {
     public static void main(String[] args) {
+        HeroNode root = new HeroNode(1, "宋江");
+        HeroNode node2 = new HeroNode(3, "吴用");
+        HeroNode node3 = new HeroNode(6, "卢俊义");
+        HeroNode node4 = new HeroNode(8, "林冲");
+        HeroNode node5 = new HeroNode(10, "林冲");
+        HeroNode node6 = new HeroNode(14, "关胜");
 
+        //
+        BinaryTree binaryTree = new BinaryTree();
+        binaryTree.setRoot(root);
+        root.setLeft(node2);
+        root.setRight(node3);
+        node2.setLeft(node4);
+        node2.setRight(node5);
+        node3.setLeft(node6);
+
+        binaryTree.threadedNodes();
+
+        //以10号节点测试
+        HeroNode leftNode = node5.getLeft();
+        HeroNode rightNode = node5.getRight();
+
+        System.out.println("10号节点的前驱节点是：" + leftNode.toString());
+        System.out.println("10号节点的后续节点是：" + rightNode.toString());
+
+        System.out.println("使用线索化方式遍历");
+        binaryTree.threadedList();
     }
 }
 
@@ -23,6 +49,37 @@ class BinaryTree{
     }
 
     //编写对二叉树进行中序线索华
+
+    /**
+     *
+     */
+    public void threadedNodes(){
+        this.threadedNodes(root);
+    }
+
+    //遍历线索化二叉树
+    public void threadedList(){
+        //定义一个变量，存储当前遍历的节点
+        HeroNode node = root;
+        while(node != null){
+            //循环找到leftType == 1 的节点，第一个是8号节点
+            //后面随着遍历而变化，因为当leftType == 1 时，说明是按线索化处理的有效节点
+            while(node.getLeftType() == 0){
+                node = node.getLeft();
+            }
+            //打印当前这个节点
+            System.out.println(node.toString());
+
+            //如果当前节点的右指针指向的是后继节点，就一直输出
+            while (node.getRightType() == 1){
+                //获取当前节点的后继节点
+                node = node.getRight();
+                System.out.println(node);
+            }
+            //替换遍历的节点
+            node = node.getRight();
+        }
+    }
 
     /**
      *
@@ -49,6 +106,10 @@ class BinaryTree{
             //修改前驱节点的右指针的类型
             pre.setRightType(1);
         }
+        //让当前节点是下一个节点的前驱节点
+        pre = node;
+
+
         //线索化右子树
         threadedNodes(node.getRight());
     }
